@@ -261,3 +261,28 @@ code {
 .bx--inline-notification{
     max-width: unset !important;
 }
+.landing-page_big:visited {
+	color: #161616 !important;
+	background-color: #ffffff;
+	text-decoration: none;
+}
+.landing-page_big {
+	min-width: 10rem;
+	min-height: 10rem;
+	color: #161616;
+	background-color: #fff;
+	display: inline-block;
+}
+.landing-page_big:hover {
+	color: #161616 !important;
+	background-color: #e0e0e0;
+	text-decoration: none;
+}
+.landing-page_big img {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	margin-right: .5rem;
+	margin-bottom: .5rem;
+	fill: #fff;
+}
