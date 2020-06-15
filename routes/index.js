@@ -45,6 +45,7 @@ router.get('/', function(req, res, next) {
     res.render('users', {
       title: 'Users',
       user: req.user,
+      bigCommerceAttrExists: (bigCommerceAttr) ? true : false,
       loggedin: (req.query.loggedin == 'success') ? true : false,
       bigCommerceUrl: loginUrl
     });
