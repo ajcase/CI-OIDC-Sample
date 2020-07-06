@@ -14,6 +14,7 @@ const jwt = require('jsonwebtoken');
 const {v4: uuidv4} = require('uuid');
 
 function getLoginUrl(customerId, storeHash, storeUrl, clientId, clientSecret) {
+   //console.log(storeHash, storeUrl, clientId, clientSecret);
    const dateCreated = Math. round((new Date()). getTime() / 1000);
    const  payload = {
        "iss": clientId,
@@ -37,17 +38,11 @@ router.get('/', function(req, res, next) {
     console.log(req.user);
     // Added by Eugene - call to loginUrl function that builds SSO URL for BigCommerce store.
     var bigCommerceAttr = req.user._json.bigCommerce;
-    //Log the bigCommerce attribute value
-    console.log(bigCommerceAttr);
-    const loginUrl = getLoginUrl(bigCommerceAttr, storeHash, storeUrl, clientId, clientSecret);
-    //Log the BigCommerce SSO URL
-    console.log(loginUrl);
     res.render('users', {
       title: 'Users',
       user: req.user,
       bigCommerceAttrExists: (bigCommerceAttr) ? true : false,
-      loggedin: (req.query.loggedin == 'success') ? true : false,
-      bigCommerceUrl: loginUrl
+      loggedin: (req.query.loggedin == 'success') ? true : false
     });
   }
   else{
@@ -63,11 +58,12 @@ router.get('/bigCommerceUrl', function(req, res, next) {
 
   if(req.session.accessToken){
     // Log the user profile
-    console.log(req.user);
+
+    console.log(">>>> Started BigCommerce SSO URL generation");
     // Added by Eugene - call to loginUrl function that builds SSO URL for BigCommerce store.
     var bigCommerceAttr = req.user._json.bigCommerce;
     //Log the bigCommerce attribute value
-    console.log(bigCommerceAttr);
+    console.log(">>>> Building login URL for:", bigCommerceAttr);
     const loginUrl = getLoginUrl(bigCommerceAttr, storeHash, storeUrl, clientId, clientSecret);
     //Log the BigCommerce SSO URL
     console.log(loginUrl);
